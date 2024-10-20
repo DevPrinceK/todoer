@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Todos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="container card col-md-8 col-lg-6, col-12  mt-5">
+            <div class="card-body my-5">
+                <div class="container">
+                    <h3 class="text-center">{% block heading %} Update Todo {% endblock %}</h3>
+                </div>
+                <!-- todo creation forms -->
+                <form method="POST">
+                    <label for="title">Title</label>
+                    <input class="form-control" name="title" id="title" value="{{ todo['title'] }}" required>
+                    <label for="detail">Detail</label>
+                    <textarea class="form-control" name="detail" id="detail" cols="30" rows="5">{{ todo['detail'] }}</textarea>
+                    <label for="duedate">Due Date</label>
+                    <input class="form-control" name="duedate" id="duedate" type="date" value="{{ todo['duedate'] }}" required>
+                    <label for="duedate">Status</label>
+                    <select class="form-control" name="status" id="status">
+                        <option value="Pending" {% if todo['sts'] == "Pending" %} selected {% endif %} >Pending</option>
+                        <option value="Completed" {% if todo['sts'] == "Completed" %} selected {% endif %}>Completed</option>
+                    </select>
+                    <input class="form-control btn btn-sm btn-primary mt-4"  type="submit" value="Update">
+                    <a href="{{ url_for('todo.index') }}" class="d-flex justify-content-end mt-2">Home</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

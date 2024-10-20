@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Todoer | {% block title %} {% endblock %} </title>
+</head>
+<body>
+  <!-- alert -- flash message -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container mt-3">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+    <!-- main page container -->
+    <div class="container">
+        <!-- top nav bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="">Todoer</a>
+             
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex" method="GET" action="{{ url_for('todo.search') }}">
+                  <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+              </div>
+
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="d-flex justify-content-end btn btn-sm btn-danger">Logout</a>
+        </nav>
+        
+        <!-- content container -->
+         <div class="container">
+            {% block content %} {% endblock %}
+         </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'auth_base.html' %}
+
+{% block heading %} {% block title %} Register {% endblock %} {% endblock %}
+
+{% block content %}
+<form method="POST">
+    <label for="username">Username</label>
+    <input class="form-control" name="username" id="username" required>
+    <label for="password">Password</label>
+    <input class="form-control"  type="password" name="password" id="password" required>
+    <label for="password">Confirm Password</label>
+    <input class="form-control"  type="password2" name="password2" id="password2" required>
+    <input class="form-control btn btn-sm btn-primary mt-4"  type="submit" value="Register">
+    <a href="{{ url_for('auth.login') }}" class="d-flex justify-content-end mt-2">Login</a>
+</form>
+{% endblock %}
